@@ -38,17 +38,30 @@ export default function TextForm(props) {
             }}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleUpClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleUpClick}
+        >
           Convert to Uppercase
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleLowClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleLowClick}
+        >
           Convert to Lowercase
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleClearClick}>
+        <button
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleClearClick}
+        >
           Clear Text
         </button>
         <button
-          className="btn btn-primary mx-1"
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
           onClick={() => {
             setText(text.trim());
             props.showAlert('Trimmed text', 'success');
@@ -57,7 +70,8 @@ export default function TextForm(props) {
           Trim Spaces
         </button>
         <button
-          className="btn btn-primary mx-1"
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
           onClick={() => {
             setText(text.replace(/[^a-zA-Z0-9 ]/g, ''));
             props.showAlert('Removed Special Characters', 'success');
@@ -66,7 +80,8 @@ export default function TextForm(props) {
           Remove Special Characters
         </button>
         <button
-          className="btn btn-primary mx-1"
+          disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
           onClick={() => {
             setText(text.replace(/\d/g, ''));
             props.showAlert('Removed Numbers', 'success');
@@ -81,12 +96,12 @@ export default function TextForm(props) {
       >
         <h2>Your text summary</h2>
         <p>
-          {text.split(' ').filter((element) => element.length !== 0).length}{' '}
+          {text.split(/\s+/).filter((element) => element.length !== 0).length}{' '}
           words and {text.length} characters
         </p>
         <p>
           {0.008 *
-            text.split(' ').filter((element) => element.length !== 0)
+            text.split(/\s+/).filter((element) => element.length !== 0)
               .length}{' '}
           minutes read
         </p>
