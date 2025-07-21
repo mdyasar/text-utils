@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
@@ -32,19 +33,29 @@ function App() {
   };
   return (
     <>
-      <Navbar
-        title="Text Utils"
-        aboutText="About Us"
-        mode={mode}
-        toggleMode={toggleMode}
-      />
-      <Alert alert={alert} />
-      <TextForm
-        heading="Enter the text to analyze below"
-        mode={mode}
-        showAlert={showAlert}
-      />
-      {/* <About /> */}
+      <BrowserRouter>
+        <Navbar
+          title="Text Utils"
+          aboutText="About Us"
+          mode={mode}
+          toggleMode={toggleMode}
+        />
+        <Alert alert={alert} />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <TextForm
+                heading="Enter the text to analyze below"
+                mode={mode}
+                showAlert={showAlert}
+              />
+            }
+          />
+          <Route exact path="/about" element={<About />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
